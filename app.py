@@ -40,7 +40,7 @@ def reverse_word():
 @app.route('/login')
 def login():
     # Redirect the user to Google's OAuth 2.0 consent page
-    redirect_uri = url_for('auth_callback', _external=True)
+    redirect_uri = url_for('auth_callback', _external=True, _scheme='https')
     return google.authorize_redirect(redirect_uri)
 
 
