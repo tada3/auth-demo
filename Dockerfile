@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . /app
 
 # Install the Python dependencies
-RUN pip install --no-cache-dir flask
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port the app runs on
 EXPOSE 8080
