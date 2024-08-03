@@ -1,0 +1,22 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Word</title>
+</head>
+<body>
+    <h1>Reverse Your Word</h1>
+    <form method="post">
+        <label for="word">Enter a word:</label>
+        <input type="text" id="word" name="word" required>
+        <button type="submit">Reverse</button>
+    </form>
+    {% if reversed_word %}
+        <h2>Reversed: {{ reversed_word }}</h2>
+    {% endif %}
+</body>
+</html>
+
