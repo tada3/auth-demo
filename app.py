@@ -24,6 +24,9 @@ google = oauth.register(
     claims_options={'iss': {'essential': True, 'values': ['https://accounts.google.com']}}
 )
 
+app_env = os.getenv('APP_ENV', 'local')  # Default to 'local' if not set
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index_page():
@@ -40,7 +43,8 @@ def reverse_word():
 @app.route('/login')
 def login():
     # Redirect the user to Google's OAuth 2.0 consent page
-    redirect_uri = url_for('auth_callback', _external=True, _scheme='https')
+    scheme = 'http' if app_env == 'local' else 'https'
+    redirect_uri = url_for('auth_callback', _external=True, _scheme=scheme)
     return google.authorize_redirect(redirect_uri)
 
 
