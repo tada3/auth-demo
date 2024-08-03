@@ -20,6 +20,8 @@ google = oauth.register(
     authorize_params=None,
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     client_kwargs={'scope': 'openid email profile'},
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    claims_options={'iss': {'essential': True, 'values': ['https://accounts.google.com']}}
 )
 
 
@@ -38,12 +40,12 @@ def reverse_word():
 @app.route('/login')
 def login():
     # Redirect the user to Google's OAuth 2.0 consent page
-    redirect_uri = url_for('authorize', _external=True)
+    redirect_uri = url_for('auth_callback', _external=True)
     return google.authorize_redirect(redirect_uri)
 
 
-@app.route('/authorize')
-def authorize():
+@app.route('/callback')
+def auth_callback():
     # Handle the response from Google's OAuth 2.0 server
     token = google.authorize_access_token()
     user_info = google.get('userinfo').json()
