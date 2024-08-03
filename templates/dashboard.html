@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    {% if user_info %}
+        <p>Welcome, {{ user_info['name'] }}!</p>
+        <p>Email: {{ user_info['email'] }}</p>
+    {% else %}
+        <p>You are not logged in.</p>
+    {% endif %}
+    <a href="{{ url_for('index_page') }}">Go to Home</a>
+</body>
+</html>
